@@ -8,7 +8,7 @@ const auth = async (req, res, next) => {
     let decodedData;
 
     if (token && isCustomAuth) {
-      decodedData = jwt.verify(token, 'secret');
+      decodedData = jwt.verify(token, process.env.JWT_SECRET); // Use the JWT_SECRET environment variable
       req.userId = decodedData?.id;
     } else {
       decodedData = jwt.decode(token);
@@ -18,9 +18,10 @@ const auth = async (req, res, next) => {
     next();
   } catch (error) {
     res.status(401).json({ message: "Authentication failed" });
-}
+  }
 };
 
 export default auth;
+
 
 
