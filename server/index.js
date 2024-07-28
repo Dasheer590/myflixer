@@ -15,7 +15,7 @@ app.use(cors());
 app.use('/movies', movieRoutes);
 app.use('/users', userRoutes);
 
-const CONNECTION_URL = 'mongodb+srv://breezydanbaraka:4hjzMUHxSfw0mjsF@myflixer.dtfyxsy.mongodb.net/sample_mflix?retryWrites=true&w=majority&appName=myflixer';
+const CONNECTION_URL = process.env.CONNECTION_URL || 'mongodb+srv://breezydanbaraka:4hjzMUHxSfw0mjsF@myflixer.dtfyxsy.mongodb.net/sample_mflix?retryWrites=true&w=majority&appName=myflixer';
 const PORT = process.env.PORT || 5000;
 
 mongoose.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -23,3 +23,4 @@ mongoose.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: tr
   .catch((error) => console.log(`${error} did not connect`));
 
 mongoose.set('strictQuery', true);
+
